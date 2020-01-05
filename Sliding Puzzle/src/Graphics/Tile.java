@@ -8,14 +8,15 @@ public class Tile extends JComponent{
     int x;
     int y;
     Color c;
+    JLabel label;
     Tile(int number, int x, int y, Color c) {
         this.number = number;
         this.x = x;
         this.y = y;
         this.c = c;
-        JLabel num = new JLabel(Integer.toString(number));
-        this.add(num);
-        num.setVisible(true);
+        label = new JLabel(Integer.toString(number));
+        label.setFont(label.getFont().deriveFont(100f));
+        this.add(label);
     }
     public void paint(Graphics g){
         int side = 150;
