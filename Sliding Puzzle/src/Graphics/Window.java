@@ -8,6 +8,7 @@ import java.awt.*;
 public class Window {
     JFrame frame;
     JPanel panel;
+    JPanel inner;
     int panelWidth = 800;
     int panelHeight = 800;
     Music m;
@@ -26,18 +27,28 @@ public class Window {
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(panelWidth,panelHeight));
         panel.setBackground(new Color(56,52,55));
-        panel.setLayout(new SpringLayout());
-        frame.add(panel);
+        panel.setLayout(new GridBagLayout());
         
-        for(int i = 10; i < 700; i = i + 155){
-            for(int j = 10; j < 700; j = j + 155){
-                Tile tile = new Tile(1,j,i,new Color(35,54,63).brighter());
-                tile.setPreferredSize(new Dimension(panelWidth,panelHeight));
-//                panel.add(tile.label);
-                panel.add(tile);
+        inner = new JPanel();
+        inner.setPreferredSize(new Dimension(panelWidth-20,panelHeight-20));
+        inner.setBackground(new Color(56,52,55));
+        inner.setLayout(new GridLayout(4,4,10,10));
+        panel.add(inner);
+        
+        
+        int number = 1;
+//        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 16; j++){
+                Tile tile = new Tile(number);
+                tile.setBackground(new Color(35,54,63).brighter());
+                tile.setPreferredSize(new Dimension());
+                inner.add(tile);
+                number++;
             }
-        }
         
+        
+        frame.add(panel);
+//        frame.setContentPane(panel);
 
         m = new Music();
         m.startMusic();
