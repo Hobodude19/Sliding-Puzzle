@@ -25,19 +25,17 @@ public class Window {
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(panelWidth,panelHeight));
         panel.setBackground(new Color(56,52,55));
-        panel.setLayout(new FlowLayout());
+        panel.setLayout(new SpringLayout());
         frame.add(panel);
         
-        for(int i = 10; i < 800; i = i + 20){
-            for(int j = 10; j < 620; j = j + 155){
+        for(int i = 10; i < 700; i = i + 155){
+            for(int j = 10; j < 700; j = j + 155){
                 Tile tile = new Tile(1,j,i,new Color(35,54,63).brighter());
                 tile.setPreferredSize(new Dimension(panelWidth,panelHeight));
                 panel.add(tile);
             }
         }
-//        Tile tile = new Tile(1,620,10,new Color(35,54,63).brighter());
-//            tile.setPreferredSize(new Dimension(panelWidth,panelHeight));
-//            panel.add(tile);
+//        panel.repaint();
         
         
         
