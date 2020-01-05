@@ -7,7 +7,7 @@ public class Tile extends JComponent{
     int number;
     int x;
     int y;
-    JTextArea txt;
+    JLabel label;
 
     Color c;
     Tile(int number, int x, int y, Color c) {
@@ -16,20 +16,13 @@ public class Tile extends JComponent{
         this.y = y;
         this.c = c;
 
-        JLabel num = new JLabel(Integer.toString(number));
-        this.add(num);
-        num.setVisible(true);
-
-        txt = new JTextArea(String.valueOf(number));
-        txt.setFont(txt.getFont().deriveFont(32f));
-        txt.setEditable(false);
-        txt.setSize(32,32);
+        label = new JLabel(Integer.toString(number));
+        label.setFont(label.getFont().deriveFont(100f));
+        this.add(label);
     }
     public void paint(Graphics g){
         int side = 150;
         g.setColor(c);
         g.fillRect(x, y, side, side);
-        txt.setLocation(75,75);
-//        g.fill
     }
 }

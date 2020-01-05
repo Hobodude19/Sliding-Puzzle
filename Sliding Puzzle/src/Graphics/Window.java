@@ -33,10 +33,10 @@ public class Window {
             for(int j = 10; j < 700; j = j + 155){
                 Tile tile = new Tile(1,j,i,new Color(35,54,63).brighter());
                 tile.setPreferredSize(new Dimension(panelWidth,panelHeight));
+//                panel.add(tile.label);
                 panel.add(tile);
             }
         }
-//        panel.repaint();
         
 
         m = new Music();
