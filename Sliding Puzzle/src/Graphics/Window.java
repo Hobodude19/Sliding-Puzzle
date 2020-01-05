@@ -11,7 +11,6 @@ public class Window {
     int panelWidth = 800;
     int panelHeight = 800;
     Music m;
-    Graphics g;
 
     public Window() {
         panel = new JPanel();
@@ -29,9 +28,12 @@ public class Window {
 
         frame.add(panel);
 
-        Tile tile = new Tile(1,new Color(54,43,65));
+        Tile tile = new Tile(1,Color.white);
         tile.setPreferredSize(new Dimension(panelWidth,panelHeight));
+        panel.add(tile.txt, BorderLayout.CENTER);
         panel.add(tile);
+
+        tile.txt.setVisible(true);
         tile.setVisible(true);
 
         m = new Music();
