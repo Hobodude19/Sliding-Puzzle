@@ -2,6 +2,8 @@ package Graphics;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Error {
     private JFrame jf;
@@ -9,7 +11,13 @@ public class Error {
 
     public Error() {
         jf = new JFrame();
-        jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        jf.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                txt.setText("");
+                jf.setVisible(false);
+                jf.dispose();
+            }
+        });
         jf.setSize(new Dimension(250,250));
         jf.setResizable(false);
 
@@ -20,7 +28,7 @@ public class Error {
     }
 
     public void editText(String s) {
-        txt.append(s);
+        txt.setText(s);
     }
 
     public void showError() {
