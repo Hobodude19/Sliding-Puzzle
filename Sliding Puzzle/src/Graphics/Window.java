@@ -13,15 +13,16 @@ public class Window {
     Music m;
 
     public Window() {
+
         frame = new JFrame("Sliding Puzzle");
-        
+
         frame.getContentPane().setBackground(new Color(75,79,87));
         frame.setSize(1200,900);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new GridBagLayout());
-        
+
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(panelWidth,panelHeight));
         panel.setBackground(new Color(56,52,55));
@@ -37,8 +38,7 @@ public class Window {
         }
 //        panel.repaint();
         
-        
-        
+
         m = new Music();
         m.startMusic();
 
