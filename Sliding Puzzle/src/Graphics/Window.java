@@ -41,6 +41,17 @@ public class Window {
 
         m = new Music();
         m.startMusic();
+      
+        JButton startMusic = new JButton("Play Music");
+        startMusic.addActionListener(e -> m.startMusic());
+        startMusic.setPreferredSize(new Dimension(100,30));
+
+        JButton stopMusic = new JButton("Stop Music");
+        stopMusic.addActionListener(e -> m.stopMusic());
+        stopMusic.setPreferredSize(new Dimension(100,30));
+
+        frame.add(startMusic);
+        frame.add(stopMusic);
 
         showFrame();
     }
@@ -49,3 +60,4 @@ public class Window {
         frame.setVisible(true);
     }
 }
+
