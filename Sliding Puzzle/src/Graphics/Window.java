@@ -25,7 +25,7 @@ public class Window {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new GridBagLayout());
-        frame.add(inner,new GridBagConstraints());
+        frame.add(inner);
         
         
         m = new Music();
