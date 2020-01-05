@@ -9,9 +9,10 @@ public class Window {
     public Window() {
         frame = new JFrame("Sliding Puzzle");
 
-        frame.getContentPane().setBackground(Color.GRAY.darker());
+        frame.getContentPane().setBackground(new Color(56,52,55));
         frame.setSize(1200,900);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
 
         showFrame();
     }
