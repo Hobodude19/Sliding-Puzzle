@@ -4,6 +4,8 @@ import Logic.Music;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Window {
     JFrame frame;
@@ -11,13 +13,19 @@ public class Window {
     int panelWidth = 800;
     int panelHeight = 800;
     Music m;
+    Graphics g;
 
     public Window() {
+
+        inner = new JPanel();
+        inner.setPreferredSize(new Dimension(800,800));
+        inner.setBackground(new Color(56,52,55));
+        inner.setVisible(true);
         
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(panelWidth,panelHeight));
         panel.setBackground(new Color(56,52,55));
-//        
+
         frame = new JFrame("Sliding Puzzle");
         
         frame.getContentPane().setBackground(new Color(75,79,87));
@@ -26,6 +34,8 @@ public class Window {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new GridBagLayout());
+
+        frame.add(inner);
         frame.add(panel);
         
         Tile tile = new Tile(1,new Color(54,43,65));
@@ -33,10 +43,19 @@ public class Window {
         panel.add(tile);
         tile.setVisible(true);
         
-        
-        
         m = new Music();
         m.startMusic();
+
+        JButton startMusic = new JButton("Play Music");
+        startMusic.addActionListener(e -> m.startMusic());
+        startMusic.setPreferredSize(new Dimension(100,30));
+
+        JButton stopMusic = new JButton("Stop Music");
+        stopMusic.addActionListener(e -> m.stopMusic());
+        stopMusic.setPreferredSize(new Dimension(100,30));
+
+        frame.add(startMusic);
+        frame.add(stopMusic);
 
         showFrame();
     }
@@ -44,4 +63,5 @@ public class Window {
     private void showFrame() {
         frame.setVisible(true);
     }
+
 }

@@ -1,5 +1,7 @@
 package Logic;
 
+import Graphics.Error;
+
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
@@ -7,6 +9,7 @@ import javax.sound.sampled.FloatControl;
 public class Music {
     private Clip c;
     private FloatControl fc;
+    private Error r = new Error();
 
     public Music() {
         try {
@@ -21,6 +24,17 @@ public class Music {
     }
 
     public void startMusic() {
-        c.start();
+        if(c.isRunning()) {
+            r.editText("Music already playing!");
+            r.showError();
+        }
+        else {
+            c.start();
+        }
+    }
+
+    public void stopMusic(){
+        c.stop();
+        c.setFramePosition(0);
     }
 }
