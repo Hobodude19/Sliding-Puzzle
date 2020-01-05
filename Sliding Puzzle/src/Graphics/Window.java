@@ -28,7 +28,7 @@ public class Window {
         frame.setLayout(new GridBagLayout());
         frame.add(panel);
         
-        Tile tile = new Tile(1,new Color(54,43,65));
+        Tile tile = new Tile(1,new Color(75,54,63));
         tile.setPreferredSize(new Dimension(panelWidth,panelHeight));
         panel.add(tile);
         tile.setVisible(true);

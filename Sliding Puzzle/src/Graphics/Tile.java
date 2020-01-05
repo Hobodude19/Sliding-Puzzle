@@ -9,6 +9,9 @@ public class Tile extends JComponent{
     Tile(int number, Color c) {
         this.number = number;
         this.c = c;
+        JLabel num = new JLabel(Integer.toString(number));
+        this.add(num);
+        num.setVisible(true);
     }
     public void paint(Graphics g){
         int side = 150;
