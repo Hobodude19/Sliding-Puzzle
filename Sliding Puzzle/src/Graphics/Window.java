@@ -9,26 +9,40 @@ import java.awt.event.ActionListener;
 
 public class Window {
     JFrame frame;
-    JPanel inner;
+    JPanel panel;
+    int panelWidth = 800;
+    int panelHeight = 800;
     Music m;
     Graphics g;
 
     public Window() {
+
         inner = new JPanel();
         inner.setPreferredSize(new Dimension(800,800));
         inner.setBackground(new Color(56,52,55));
         inner.setVisible(true);
         
-        frame = new JFrame("Sliding Puzzle");
+        panel = new JPanel();
+        panel.setPreferredSize(new Dimension(panelWidth,panelHeight));
+        panel.setBackground(new Color(56,52,55));
 
+        frame = new JFrame("Sliding Puzzle");
+        
         frame.getContentPane().setBackground(new Color(75,79,87));
         frame.setSize(1200,900);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new GridBagLayout());
-        frame.add(inner);
 
+        frame.add(inner);
+        frame.add(panel);
+        
+        Tile tile = new Tile(1,new Color(54,43,65));
+        tile.setPreferredSize(new Dimension(panelWidth,panelHeight));
+        panel.add(tile);
+        tile.setVisible(true);
+        
         m = new Music();
         m.startMusic();
 
