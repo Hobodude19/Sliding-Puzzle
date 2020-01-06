@@ -28,4 +28,8 @@ public class Tile extends JPanel{
             this.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
         }
     }
+
+    public boolean isBorder() {
+        return isBorder;
+    }
 }
