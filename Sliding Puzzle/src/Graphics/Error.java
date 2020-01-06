@@ -26,7 +26,7 @@ public class Error {
 
         jf.add(txt);
     }
-
+    
     public void editText(String s) {
         txt.setText(s);
     }

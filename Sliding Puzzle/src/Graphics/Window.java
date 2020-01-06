@@ -33,14 +33,13 @@ public class Window {
         inner = new JPanel();
         inner.setPreferredSize(new Dimension(panelWidth-20,panelHeight-20));
         inner.setBackground(new Color(56,52,55));
-        inner.setLayout(new GridLayout(4,4,10,10));//
+        inner.setLayout(new GridLayout(4,4,10,10));//Spaces the components 10 pixels apart vertically and horizontally
         panel.add(inner);
         
-        
-        for(int i = 1; i <= 16; i++){
+        for(int i = 1; i < 16; i++){
             Tile tile = new Tile(i);
             tile.setBackground(new Color(35,54,63).brighter());
-            tile.setPreferredSize(new Dimension());
+            tile.setPreferredSize(new Dimension());//Dimension doesn't matter since the inner JPanel layout sizes it
             inner.add(tile);
         }
             
