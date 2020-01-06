@@ -105,7 +105,50 @@ public class Window {
         for(int i = 0; i < 16; i++) {
             inner.add(tiles.get(i));
         }
-
+        
+        //size of a row is 4
+        //find where the 16 is, then get the index
+        //left of the tile is index-1, right is index+1
+        //up of the tile is index-size, down is index+size
+        int index = -1;
+        for(int i = 0; i < 16; i++){
+            if(tiles.get(i).number == 16){
+                index = i;
+            }
+        }
+        int left = -1;
+        int right = -1;
+        int up = -1;
+        int down = -1;
+        try{
+            tiles.get(index-1);
+            left = index-1;
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            return;
+        }
+        try{
+            tiles.get(index+1);
+            right = index+1;
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            return;
+        }
+        try{
+            tiles.get(index-1);
+            left = index-1;
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            return;
+        }
+        try{
+            tiles.get(index-1);
+            left = index-1;
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            return;
+        }
+        
         frame.add(panel);
 
         m = new Music();
