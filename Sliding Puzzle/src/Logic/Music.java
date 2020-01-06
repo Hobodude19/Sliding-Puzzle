@@ -35,6 +35,5 @@ public class Music {
 
     public void stopMusic(){
         c.stop();
-        c.setFramePosition(0);
     }
 }
