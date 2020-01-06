@@ -28,10 +28,6 @@ public class Error {
         jf.add(txt);
     }
 
-    /**
-     * Edits error text
-     * @param s String with error text
-     */
     public void editText(String s) {
         txt.setText(s);
     }

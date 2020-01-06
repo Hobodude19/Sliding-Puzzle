@@ -4,12 +4,11 @@ import Logic.Music;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.awt.event.*;
 
 public class Window {
     JFrame frame;
@@ -18,11 +17,18 @@ public class Window {
     int panelWidth = 800;
     int panelHeight = 800;
     Music m;
+    Color frameC;
+    Color panelC;
+    Color tileC;
 
     public Window() {
+        frameC = new Color(75,79,87);
+        panelC = new Color(56,52,55);
+        tileC = new Color(35,54,63).brighter();
+        
         //The main window
         frame = new JFrame("Sliding Puzzle");
-        frame.getContentPane().setBackground(new Color(75,79,87));
+        frame.getContentPane().setBackground(frameC);
         frame.setSize(1200,900);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,11 +48,23 @@ public class Window {
         inner.setLayout(new GridLayout(4,4,10,10));//
         panel.add(inner);
 
+        //The panel for the game
+        panel = new JPanel();
+        panel.setPreferredSize(new Dimension(panelWidth,panelHeight));
+        panel.setBackground(panelC);
+        panel.setLayout(new GridBagLayout());//Centered layout
+        
+        //GridLayout puts spaces in between its components but does not put the space in between the edges
+        inner = new JPanel();
+        inner.setPreferredSize(new Dimension(panelWidth-20,panelHeight-20));
+        inner.setBackground(panelC);
+        inner.setLayout(new GridLayout(4,4,10,10));//Spaces the components 10 pixels apart vertically and horizontally
+        panel.add(inner);
+        
         ArrayList<Tile> tiles = new ArrayList<Tile>();
         for(int i = 1; i < 16; i++){
             Tile tile = new Tile(i);
-            tile.setBackground(new Color(35,54,63).brighter());
-            tile.setPreferredSize(new Dimension());
+            tile.setBackground(tileC);
             tile.addMouseListener(new MouseListener(){
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -70,8 +88,13 @@ public class Window {
             });
             tiles.add(tile);
         }
+        Tile blank = new Tile(16);
+        blank.setBackground(panelC);
+        blank.label.setForeground(panelC);
+        tiles.add(blank);
+      
         Collections.shuffle(tiles);
-        for(int i = 0; i < 15; i++) {
+        for(int i = 0; i < 16; i++) {
             inner.add(tiles.get(i));
             System.out.println(tiles.get(i).number);
         }
