@@ -19,6 +19,7 @@ public class Window {
     Color panelC;
     Color tileC;
     private int lastClicked = -1;
+    ArrayList<Integer> validMoves = new ArrayList<>();
 
     public Window() {
         frameC = new Color(75,79,87);
@@ -145,10 +146,15 @@ public class Window {
         }
         catch(IndexOutOfBoundsException e){
         }
-        System.out.println(left);
-        System.out.println(right);
-        System.out.println(up);
-        System.out.println(down);
+        if(left != -1)
+            validMoves.add(left);
+        if(right != -1)
+            validMoves.add(right);
+        if(up != -1)
+            validMoves.add(up);
+        if(down != -1)
+            validMoves.add(down);
+        
         frame.add(panel);
 
         m = new Music();
