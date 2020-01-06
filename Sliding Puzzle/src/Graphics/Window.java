@@ -14,41 +14,37 @@ public class Window {
     Music m;
 
     public Window() {
-
+        //The main window
         frame = new JFrame("Sliding Puzzle");
-
         frame.getContentPane().setBackground(new Color(75,79,87));
         frame.setSize(1200,900);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-        frame.setLayout(new GridBagLayout());
-
+        frame.setLayout(new GridBagLayout());//Fits all the components on the frame to the center
+        
+        //The panel for the game
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(panelWidth,panelHeight));
         panel.setBackground(new Color(56,52,55));
-        panel.setLayout(new GridBagLayout());
+        panel.setLayout(new GridBagLayout());//Centered layout
         
+        //GridLayout puts spaces in between its components but does not put the space in between the edges
         inner = new JPanel();
         inner.setPreferredSize(new Dimension(panelWidth-20,panelHeight-20));
         inner.setBackground(new Color(56,52,55));
-        inner.setLayout(new GridLayout(4,4,10,10));
+        inner.setLayout(new GridLayout(4,4,10,10));//
         panel.add(inner);
         
         
-        int number = 1;
-//        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 16; j++){
-                Tile tile = new Tile(number);
-                tile.setBackground(new Color(35,54,63).brighter());
-                tile.setPreferredSize(new Dimension());
-                inner.add(tile);
-                number++;
-            }
-        
-        
+        for(int i = 1; i <= 16; i++){
+            Tile tile = new Tile(i);
+            tile.setBackground(new Color(35,54,63).brighter());
+            tile.setPreferredSize(new Dimension());
+            inner.add(tile);
+        }
+            
         frame.add(panel);
-//        frame.setContentPane(panel);
 
         m = new Music();
         m.startMusic();
