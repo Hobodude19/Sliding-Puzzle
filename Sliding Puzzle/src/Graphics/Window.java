@@ -14,12 +14,14 @@ public class Window {
     JPanel inner;
     int panelWidth = 800;
     int panelHeight = 800;
+    int index = 0;
     Music m;
     Color frameC;
     Color panelC;
     Color tileC;
     private int lastClicked = -1;
-    ArrayList<Integer> validMoves = new ArrayList<>();
+    ArrayList<Integer> validMoves = new ArrayList<>(); //Stores indices of valid move. Indices relate to tiles arraylist
+    ArrayList<Tile> tiles = new ArrayList<Tile>(); //Stores all tiles
 
     public Window() {
         frameC = new Color(75,79,87);
@@ -61,7 +63,6 @@ public class Window {
         inner.setLayout(new GridLayout(4,4,10,10));//Spaces the components 10 pixels apart vertically and horizontally
         panel.add(inner);
 
-        ArrayList<Tile> tiles = new ArrayList<Tile>();
         for(int i = 1; i < 16; i++){
             Tile tile = new Tile(i);
             tile.setBackground(tileC);
@@ -97,9 +98,42 @@ public class Window {
             });
             tiles.add(tile);
         }
+
         Tile blank = new Tile(16);
         blank.setBackground(panelC);
         blank.label.setForeground(panelC);
+        blank.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                System.out.println("BLANK WAS PRESSED");
+                for(int i = 0; i < validMoves.size(); i++) {
+                    if(tiles.get(validMoves.get(i)).isBorder()) { //Checks if border is active on any of the valid moves
+                        Collections.swap(tiles, validMoves.get(i), index);
+                        frame.repaint();
+                    }
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
         tiles.add(blank);
 
         Collections.shuffle(tiles);
@@ -111,7 +145,7 @@ public class Window {
         //find where the 16 is, then get the index
         //left of the tile is index-1, right is index+1
         //up of the tile is index-size, down is index+size
-        int index = 0;//Should find the index no matter what
+        index = 0;//Should find the index no matter what
         for(int i = 0; i < 16; i++){
             if(tiles.get(i).number == 16){
                 index = i;
@@ -177,5 +211,15 @@ public class Window {
 
     private void showFrame() {
         frame.setVisible(true);
+    }
+
+    public void updateTiles() {
+        for(int i = 0; i < 16; i++) {
+            inner.remove(tiles.get(i));
+        }
+
+        for(int i = 0; i < 16; i++) {
+            inner.add(tiles.get(i));
+        }
     }
 }
