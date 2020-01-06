@@ -11,13 +11,14 @@ public class Main {
             try {
                 frames++;
                 if(System.currentTimeMillis() > time + 1000) {
+                    graphic.frame.setTitle("Sliding Puzzle. Fps: " +frames);
                     time = System.currentTimeMillis();
                     frames = 0;
-                    graphic.updateTiles();
                 }
             }catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+    
 }

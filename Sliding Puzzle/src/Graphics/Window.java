@@ -9,12 +9,16 @@ import java.util.Collections;
 import java.awt.event.*;
 
 public class Window {
-    JFrame frame;
+    public JFrame frame;
     JPanel panel;
     JPanel inner;
     int panelWidth = 800;
     int panelHeight = 800;
     int index = 0;
+    int left = -1;
+    int right = -1;
+    int up = -1;
+    int down = -1;
     Music m;
     Color frameC;
     Color panelC;
@@ -110,10 +114,13 @@ public class Window {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                System.out.println("BLANK WAS PRESSED");
+                updateAvailTiles();
                 for(int i = 0; i < validMoves.size(); i++) {
                     if(tiles.get(validMoves.get(i)).isBorder()) { //Checks if border is active on any of the valid moves
                         Collections.swap(tiles, validMoves.get(i), index);
+                        tiles.get(index).toggleBorder();
+                        updateTiles();
+                        frame.validate();
                         frame.repaint();
                     }
                 }
@@ -121,7 +128,7 @@ public class Window {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-
+                
             }
 
             @Override
@@ -131,12 +138,12 @@ public class Window {
 
             @Override
             public void mouseExited(MouseEvent e) {
-
+                    
             }
         });
         tiles.add(blank);
 
-        Collections.shuffle(tiles);
+        
         for(int i = 0; i < 16; i++) {
             inner.add(tiles.get(i));
         }
@@ -145,49 +152,49 @@ public class Window {
         //find where the 16 is, then get the index
         //left of the tile is index-1, right is index+1
         //up of the tile is index-size, down is index+size
-        index = 0;//Should find the index no matter what
-        for(int i = 0; i < 16; i++){
-            if(tiles.get(i).number == 16){
-                index = i;
-            }
-        }
+//        index = 0;//Should find the index no matter what
+//        for(int i = 0; i < 16; i++){
+//            if(tiles.get(i).number == 16){
+//                index = i;
+//            }
+//        }
         //If the index is out of bounds, these values will stay -1, could tested for when looking at the valid moves
-        int left = -1;
-        int right = -1;
-        int up = -1;
-        int down = -1;
-        try{
-            tiles.get(index-1);
-            left = index-1;
-        }
-        catch(IndexOutOfBoundsException e){
-        }
-        try{
-            tiles.get(index+1);
-            right = index+1;
-        }
-        catch(IndexOutOfBoundsException e){
-        }
-        try{
-            tiles.get(index-4);
-            up = index-4;
-        }
-        catch(IndexOutOfBoundsException e){
-        }
-        try{
-            tiles.get(index+4);
-            down = index+4;
-        }
-        catch(IndexOutOfBoundsException e){
-        }
-        if(left != -1)
-            validMoves.add(left);
-        if(right != -1)
-            validMoves.add(right);
-        if(up != -1)
-            validMoves.add(up);
-        if(down != -1)
-            validMoves.add(down);
+//        int left = -1;
+//        int right = -1;
+//        int up = -1;
+//        int down = -1;
+//        try{
+//            tiles.get(index-1);
+//            left = index-1;
+//        }
+//        catch(IndexOutOfBoundsException e){
+//        }
+//        try{
+//            tiles.get(index+1);
+//            right = index+1;
+//        }
+//        catch(IndexOutOfBoundsException e){
+//        }
+//        try{
+//            tiles.get(index-4);
+//            up = index-4;
+//        }
+//        catch(IndexOutOfBoundsException e){
+//        }
+//        try{
+//            tiles.get(index+4);
+//            down = index+4;
+//        }
+//        catch(IndexOutOfBoundsException e){
+//        }
+//        if(left != -1)
+//            validMoves.add(left);
+//        if(right != -1)
+//            validMoves.add(right);
+//        if(up != -1)
+//            validMoves.add(up);
+//        if(down != -1)
+//            validMoves.add(down);
 
         frame.add(panel);
 
@@ -220,6 +227,54 @@ public class Window {
 
         for(int i = 0; i < 16; i++) {
             inner.add(tiles.get(i));
+//            frame.validate();
+//            frame.repaint();
         }
+    }
+    
+    public void updateAvailTiles() {
+        validMoves.clear();
+        index = 0;//Should find the index no matter what
+        for(int i = 0; i < 16; i++){
+            if(tiles.get(i).number == 16){
+                index = i;
+            }
+        }
+        try{
+            tiles.get(index-1);
+            left = index-1;
+        }
+        catch(IndexOutOfBoundsException e){
+        }
+        try{
+            tiles.get(index+1);
+            right = index+1;
+        }
+        catch(IndexOutOfBoundsException e){
+        }
+        try{
+            tiles.get(index-4);
+            up = index-4;
+        }
+        catch(IndexOutOfBoundsException e){
+        }
+        try{
+            tiles.get(index+4);
+            down = index+4;
+        }
+        catch(IndexOutOfBoundsException e){
+        }
+        if(left != -1)
+            validMoves.add(left);
+        if(right != -1)
+            validMoves.add(right);
+        if(up != -1)
+            validMoves.add(up);
+        if(down != -1)
+            validMoves.add(down);
+    }
+    
+    public void randomizeTiles() {
+        int temp = 0;
     }
 }
