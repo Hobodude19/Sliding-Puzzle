@@ -1,7 +1,6 @@
 package Graphics;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 public class Tile extends JPanel{
@@ -28,5 +27,9 @@ public class Tile extends JPanel{
             isBorder = true;
             this.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4));
         }
+    }
+
+    public boolean isBorder() {
+        return isBorder;
     }
 }
