@@ -19,6 +19,7 @@ public class Window {
     Color panelC;
     Color tileC;
     private int lastClicked = -1;
+    ArrayList<Integer> validMoves = new ArrayList<>();
 
     public Window() {
         frameC = new Color(75,79,87);
@@ -105,7 +106,55 @@ public class Window {
         for(int i = 0; i < 16; i++) {
             inner.add(tiles.get(i));
         }
-
+        
+        //size of a row is 4
+        //find where the 16 is, then get the index
+        //left of the tile is index-1, right is index+1
+        //up of the tile is index-size, down is index+size
+        int index = 0;//Should find the index no matter what
+        for(int i = 0; i < 16; i++){
+            if(tiles.get(i).number == 16){
+                index = i;
+            }
+        }
+        //If the index is out of bounds, these values will stay -1, could tested for when looking at the valid moves
+        int left = -1;
+        int right = -1;
+        int up = -1;
+        int down = -1;
+        try{
+            tiles.get(index-1);
+            left = index-1;
+        }
+        catch(IndexOutOfBoundsException e){
+        }
+        try{
+            tiles.get(index+1);
+            right = index+1;
+        }
+        catch(IndexOutOfBoundsException e){
+        }
+        try{
+            tiles.get(index-4);
+            up = index-4;
+        }
+        catch(IndexOutOfBoundsException e){
+        }
+        try{
+            tiles.get(index+4);
+            down = index+4;
+        }
+        catch(IndexOutOfBoundsException e){
+        }
+        if(left != -1)
+            validMoves.add(left);
+        if(right != -1)
+            validMoves.add(right);
+        if(up != -1)
+            validMoves.add(up);
+        if(down != -1)
+            validMoves.add(down);
+        
         frame.add(panel);
 
         m = new Music();
