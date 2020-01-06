@@ -1,8 +1,6 @@
 package Graphics;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.*;
 
 public class Tile extends JPanel{

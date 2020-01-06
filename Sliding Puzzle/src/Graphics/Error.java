@@ -9,6 +9,7 @@ public class Error {
     private JFrame jf;
     private JTextArea txt;
 
+
     public Error() {
         jf = new JFrame();
         jf.addWindowListener(new WindowAdapter() {
@@ -27,6 +28,10 @@ public class Error {
         jf.add(txt);
     }
 
+    /**
+     * Edits error text
+     * @param s String with error text
+     */
     public void editText(String s) {
         txt.setText(s);
     }
