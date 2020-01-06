@@ -73,7 +73,7 @@ public class Window {
                 public void mousePressed(MouseEvent e) {
                     if(lastClicked != -1) {
                         for(int j = 0; j < 16; j++) {
-                            if(tiles.get(j).number == lastClicked && tiles.get(j).number != tile.number) {
+                            if(tiles.get(j).number == lastClicked && tiles.get(j).number != tile.number && tiles.get(j).isBorder()) {
                                 tiles.get(j).toggleBorder();
                             }
                         }
@@ -106,7 +106,7 @@ public class Window {
         for(int i = 0; i < 16; i++) {
             inner.add(tiles.get(i));
         }
-        
+
         //size of a row is 4
         //find where the 16 is, then get the index
         //left of the tile is index-1, right is index+1
@@ -154,7 +154,7 @@ public class Window {
             validMoves.add(up);
         if(down != -1)
             validMoves.add(down);
-        
+
         frame.add(panel);
 
         m = new Music();
