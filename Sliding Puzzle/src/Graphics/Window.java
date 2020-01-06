@@ -5,9 +5,7 @@ import Logic.Music;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.awt.event.*;
 
 public class Window {
@@ -20,12 +18,13 @@ public class Window {
     Color frameC;
     Color panelC;
     Color tileC;
+    private int lastClicked = -1;
 
     public Window() {
         frameC = new Color(75,79,87);
         panelC = new Color(56,52,55);
         tileC = new Color(35,54,63).brighter();
-        
+
         //The main window
         frame = new JFrame("Sliding Puzzle");
         frame.getContentPane().setBackground(frameC);
@@ -53,14 +52,14 @@ public class Window {
         panel.setPreferredSize(new Dimension(panelWidth,panelHeight));
         panel.setBackground(panelC);
         panel.setLayout(new GridBagLayout());//Centered layout
-        
+
         //GridLayout puts spaces in between its components but does not put the space in between the edges
         inner = new JPanel();
         inner.setPreferredSize(new Dimension(panelWidth-20,panelHeight-20));
         inner.setBackground(panelC);
         inner.setLayout(new GridLayout(4,4,10,10));//Spaces the components 10 pixels apart vertically and horizontally
         panel.add(inner);
-        
+
         ArrayList<Tile> tiles = new ArrayList<Tile>();
         for(int i = 1; i < 16; i++){
             Tile tile = new Tile(i);
@@ -71,7 +70,16 @@ public class Window {
 
                 }
                 public void mousePressed(MouseEvent e) {
-                    System.out.println(tile.number+" was clicked!");
+                    if(lastClicked != -1) {
+                        for(int j = 0; j < 16; j++) {
+                            if(tiles.get(j).number == lastClicked && tiles.get(j).number != tile.number) {
+                                tiles.get(j).toggleBorder();
+                            }
+                        }
+                    }
+
+                    lastClicked = tile.number;
+                    tile.toggleBorder();
                 }
                 @Override
                 public void mouseReleased(MouseEvent e) {
@@ -92,17 +100,15 @@ public class Window {
         blank.setBackground(panelC);
         blank.label.setForeground(panelC);
         tiles.add(blank);
-      
+
         Collections.shuffle(tiles);
         for(int i = 0; i < 16; i++) {
             inner.add(tiles.get(i));
-            System.out.println(tiles.get(i).number);
         }
 
         frame.add(panel);
 
         m = new Music();
-        m.startMusic();
 
         //Creates button for starting music and adds action listener
         JButton startMusic = new JButton("Play Music");
@@ -124,4 +130,3 @@ public class Window {
         frame.setVisible(true);
     }
 }
-
