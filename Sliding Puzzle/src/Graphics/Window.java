@@ -13,11 +13,18 @@ public class Window {
     int panelWidth = 800;
     int panelHeight = 800;
     Music m;
+    Color frameC;
+    Color panelC;
+    Color tileC;
 
     public Window() {
+        frameC = new Color(75,79,87);
+        panelC = new Color(56,52,55);
+        tileC = new Color(35,54,63).brighter();
+        
         //The main window
         frame = new JFrame("Sliding Puzzle");
-        frame.getContentPane().setBackground(new Color(75,79,87));
+        frame.getContentPane().setBackground(frameC);
         frame.setSize(1200,900);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,20 +34,19 @@ public class Window {
         //The panel for the game
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(panelWidth,panelHeight));
-        panel.setBackground(new Color(56,52,55));
+        panel.setBackground(panelC);
         panel.setLayout(new GridBagLayout());//Centered layout
         
         //GridLayout puts spaces in between its components but does not put the space in between the edges
         inner = new JPanel();
         inner.setPreferredSize(new Dimension(panelWidth-20,panelHeight-20));
-        inner.setBackground(new Color(56,52,55));
+        inner.setBackground(panelC);
         inner.setLayout(new GridLayout(4,4,10,10));//Spaces the components 10 pixels apart vertically and horizontally
         panel.add(inner);
         
         for(int i = 1; i < 16; i++){
             Tile tile = new Tile(i);
-            tile.setBackground(new Color(35,54,63).brighter());
-//            tile.setPreferredSize(new Dimension());//Dimension doesn't matter since the inner JPanel layout sizes it
+            tile.setBackground(tileC);
             tile.addMouseListener(new MouseListener(){
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -64,6 +70,10 @@ public class Window {
             });
             inner.add(tile);
         }
+        Tile blank = new Tile(16);
+        blank.setBackground(panelC);
+        blank.label.setForeground(panelC);
+        inner.add(blank);
         
             
         frame.add(panel);
