@@ -4,6 +4,7 @@ import Logic.Music;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class Window {
     JFrame frame;
@@ -39,9 +40,31 @@ public class Window {
         for(int i = 1; i < 16; i++){
             Tile tile = new Tile(i);
             tile.setBackground(new Color(35,54,63).brighter());
-            tile.setPreferredSize(new Dimension());//Dimension doesn't matter since the inner JPanel layout sizes it
+//            tile.setPreferredSize(new Dimension());//Dimension doesn't matter since the inner JPanel layout sizes it
+            tile.addMouseListener(new MouseListener(){
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
+                }
+                public void mousePressed(MouseEvent e) {
+                    System.out.println(tile.number+" was clicked!");
+                }
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
             inner.add(tile);
         }
+        
             
         frame.add(panel);
 
