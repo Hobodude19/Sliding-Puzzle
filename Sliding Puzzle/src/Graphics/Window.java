@@ -110,12 +110,13 @@ public class Window {
         //find where the 16 is, then get the index
         //left of the tile is index-1, right is index+1
         //up of the tile is index-size, down is index+size
-        int index = -1;
+        int index = 0;//Should find the index no matter what
         for(int i = 0; i < 16; i++){
             if(tiles.get(i).number == 16){
                 index = i;
             }
         }
+        //If the index is out of bounds, these values will stay -1, could tested for when looking at the valid moves
         int left = -1;
         int right = -1;
         int up = -1;
@@ -124,31 +125,30 @@ public class Window {
             tiles.get(index-1);
             left = index-1;
         }
-        catch(ArrayIndexOutOfBoundsException e){
-            return;
+        catch(IndexOutOfBoundsException e){
         }
         try{
             tiles.get(index+1);
             right = index+1;
         }
-        catch(ArrayIndexOutOfBoundsException e){
-            return;
+        catch(IndexOutOfBoundsException e){
         }
         try{
-            tiles.get(index-1);
-            left = index-1;
+            tiles.get(index-4);
+            up = index-4;
         }
-        catch(ArrayIndexOutOfBoundsException e){
-            return;
+        catch(IndexOutOfBoundsException e){
         }
         try{
-            tiles.get(index-1);
-            left = index-1;
+            tiles.get(index+4);
+            down = index+4;
         }
-        catch(ArrayIndexOutOfBoundsException e){
-            return;
+        catch(IndexOutOfBoundsException e){
         }
-        
+        System.out.println(left);
+        System.out.println(right);
+        System.out.println(up);
+        System.out.println(down);
         frame.add(panel);
 
         m = new Music();
