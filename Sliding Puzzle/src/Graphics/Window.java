@@ -144,6 +144,14 @@ public class Window {
         tiles.add(blank);
 
         randomizeTiles();
+//        for(int i = 0; i < tiles.size(); i++){
+//            if(tiles.get(i).number == 16){
+//                System.out.print("0,");
+//            }
+//            else{
+//                System.out.print(tiles.get(i).number + ",");
+//            }
+//        }
         for(int i = 0; i < 16; i++) {
             inner.add(tiles.get(i));
         }
@@ -185,22 +193,28 @@ public class Window {
     }
     
     public void updateAvailTiles() {
+        left = -1;
+        right = -1;
+        up = -1;
+        down = -1;
         validMoves.clear();
-        index = 0;//Should find the index no matter what
-        for(int i = 0; i < 16; i++){
+        for(int i = 0; i < 16; i++){//Should find the index of the blank no matter what
             if(tiles.get(i).number == 16){
                 index = i;
+                break;
             }
         }
         try{
             tiles.get(index-1);
-            left = index-1;
+            if(index % 4 != 0)
+                left = index-1;
         }
         catch(IndexOutOfBoundsException e){
         }
         try{
             tiles.get(index+1);
-            right = index+1;
+            if((index+1)%4 != 0)//3,7,11,15
+                right = index+1;
         }
         catch(IndexOutOfBoundsException e){
         }
@@ -231,6 +245,10 @@ public class Window {
             updateAvailTiles();
             int random = (int) (Math.random() * validMoves.size());
             Collections.swap(tiles, validMoves.get(random), index);
+//            updateTiles();
+//            frame.validate();
+//            frame.repaint();
+//            System.out.println(validMoves);
         }
     }
 }
