@@ -12,6 +12,7 @@ public class Window {
     public JFrame frame;
     JPanel panel;
     JPanel inner;
+    JLabel winLabel;
     int panelWidth = 800;
     int panelHeight = 800;
     int index = 0;
@@ -23,6 +24,7 @@ public class Window {
     Color frameC;
     Color panelC;
     Color tileC;
+    Color winC;
     private int lastClicked = -1;
     ArrayList<Integer> validMoves = new ArrayList<>(); //Stores indices of valid move. Indices relate to tiles arraylist
     ArrayList<Tile> tiles = new ArrayList<Tile>(); //Stores all tiles
@@ -31,6 +33,7 @@ public class Window {
         frameC = new Color(75,79,87);
         panelC = new Color(56,52,55);
         tileC = new Color(35,54,63).brighter();
+        winC = Color.decode("0xD4AF37");
 
         //The main window
         frame = new JFrame("Sliding Puzzle");
@@ -44,19 +47,6 @@ public class Window {
         //The panel for the game
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(panelWidth,panelHeight));
-        panel.setBackground(new Color(56,52,55));
-        panel.setLayout(new GridBagLayout());//Centered layout
-
-        //GridLayout puts spaces in between its components but does not put the space in between the edges
-        inner = new JPanel();
-        inner.setPreferredSize(new Dimension(panelWidth-20,panelHeight-20));
-        inner.setBackground(new Color(56,52,55));
-        inner.setLayout(new GridLayout(4,4,10,10));//
-        panel.add(inner);
-
-        //The panel for the game
-        panel = new JPanel();
-        panel.setPreferredSize(new Dimension(panelWidth,panelHeight));
         panel.setBackground(panelC);
         panel.setLayout(new GridBagLayout());//Centered layout
 
@@ -66,6 +56,11 @@ public class Window {
         inner.setBackground(panelC);
         inner.setLayout(new GridLayout(4,4,10,10));//Spaces the components 10 pixels apart vertically and horizontally
         panel.add(inner);
+
+        winLabel = new JLabel("You win!");
+        winLabel.setFont(winLabel.getFont().deriveFont(100f));
+        winLabel.setVisible(false);
+        panel.add(winLabel);
 
         for(int i = 1; i < 16; i++){
             Tile tile = new Tile(i);
@@ -120,6 +115,9 @@ public class Window {
                         Collections.swap(tiles, validMoves.get(i), index);
                         tiles.get(index).toggleBorder();
                         updateTiles();
+                        if(checkWin()) {
+                            endGame();
+                        }
                         frame.validate();
                         frame.repaint();
                     }
@@ -128,7 +126,7 @@ public class Window {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                
+
             }
 
             @Override
@@ -138,20 +136,13 @@ public class Window {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                    
+
             }
         });
         tiles.add(blank);
 
-        randomizeTiles();
-//        for(int i = 0; i < tiles.size(); i++){
-//            if(tiles.get(i).number == 16){
-//                System.out.print("0,");
-//            }
-//            else{
-//                System.out.print(tiles.get(i).number + ",");
-//            }
-//        }
+        //randomizeTiles();
+
         for(int i = 0; i < 16; i++) {
             inner.add(tiles.get(i));
         }
@@ -191,7 +182,7 @@ public class Window {
 //            frame.repaint();
         }
     }
-    
+
     public void updateAvailTiles() {
         left = -1;
         right = -1;
@@ -239,7 +230,7 @@ public class Window {
         if(down != -1)
             validMoves.add(down);
     }
-    
+
     public void randomizeTiles() {
         for(int i = 0; i < 100; i++) {
             updateAvailTiles();
@@ -250,5 +241,28 @@ public class Window {
 //            frame.repaint();
 //            System.out.println(validMoves);
         }
+    }
+
+    public boolean checkWin() {
+        int temp = 0;
+        for(int i = 0; i < tiles.size(); i++) {
+            if(tiles.get(i).number == (i + 1)) {
+                temp++;
+            }
+        }
+        if(temp == 16) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void endGame() {
+        inner.setVisible(false);
+        winLabel.setVisible(true);
+        panel.setBorder(BorderFactory.createLineBorder(winC, 4));
+        frame.validate();
+        frame.repaint();
     }
 }
