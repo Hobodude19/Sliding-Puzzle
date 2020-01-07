@@ -141,7 +141,7 @@ public class Window {
         });
         tiles.add(blank);
 
-        //randomizeTiles();
+        randomizeTiles();
 
         for(int i = 0; i < 16; i++) {
             inner.add(tiles.get(i));
